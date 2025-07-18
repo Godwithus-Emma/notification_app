@@ -73,17 +73,15 @@ class NoticeService {
     }
     await notificationsPlugin.show(id, title, body, notificationDetails());
   }
-
-  Future<void> scheduleNotification({
-    //int id = Random().nextInt(1000),
-    int id = 1,
+final int _randomId = Random().nextInt(1000000);
+  Future<void> scheduleNotification({ 
+    int? id,
     required String title,
     required String body,
     required int hour,
     required int minute,
   }) async {
     final now = tz.TZDateTime.now(tz.local);
-    //final scheduledTime = now.add(const Duration(seconds: 3));
     final scheduledTime = tz.TZDateTime(
       tz.local,
       now.year,
@@ -94,7 +92,7 @@ class NoticeService {
     );
 
     notificationsPlugin.zonedSchedule(
-      id,
+      id =_randomId,
       title,
       body,
       scheduledTime,
